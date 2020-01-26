@@ -1,5 +1,6 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { Recipe } from '../recipe.model'
+import { RecipeCreatorComponent } from 'src/app/recipe-creator/recipe-creator.component';
 @Component({
   selector: 'app-recipe-list',
   templateUrl: './recipe-list.component.html',
@@ -21,6 +22,19 @@ export class RecipeListComponent implements OnInit {
 
   onRecipeSelect(recipe: Recipe) {
     this.theRecipe.emit(recipe);
+  }
+
+  showVar: boolean = true;
+  newRecipe: any;
+  recipeCreator: RecipeCreatorComponent;
+
+  @Input() showMePartially: boolean = false;
+  toggleChild(){
+        this.showMePartially = !this.showMePartially;
+  }
+
+  addRecipe(newObject: any) {
+    this.recipes.push(newObject);
   }
 
 }
