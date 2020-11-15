@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { Recipe } from '../recipe.model'
-import { RecipeCreatorComponent } from 'src/app/recipe-creator/recipe-creator.component';
+//import { RecipeCreatorComponent } from 'src/app/recipe-creator/recipe-creator.component';
 @Component({
   selector: 'app-recipe-list',
   templateUrl: './recipe-list.component.html',
@@ -14,6 +14,11 @@ export class RecipeListComponent implements OnInit {
   ,new Recipe('Chops', 'Using this receipe you can preapere delicious chops with potatoes','https://www.kwestiasmaku.com/sites/v123.kwestiasmaku.com/files/schabowe_00.jpg')
 ];
 
+name: string;
+prepare: string;
+imgSrc: string;
+
+
   constructor() { }
 
   @Output() theRecipe = new EventEmitter<Recipe>();
@@ -25,16 +30,45 @@ export class RecipeListComponent implements OnInit {
   }
 
   showVar: boolean = true;
-  newRecipe: any;
-  recipeCreator: RecipeCreatorComponent;
+  //newRecipe: any;
+  //recipeCreator: RecipeCreatorComponent;
 
   @Input() showMePartially: boolean = false;
+  @Input() newRecipe: Recipe;
+
+
+
   toggleChild(){
         this.showMePartially = !this.showMePartially;
   }
 
-  addRecipe(newObject: any) {
-    this.recipes.push(newObject);
+  public doSomething(date: any):void {
+    console.log('Picked date: ', date);
+}
+
+addRecipe(receipe, img) {
+  this.recipes.push(receipe);
+  this.updateNameNew(receipe.name, this.imgSrc)
+  this.name = '';
+  this.prepare = '';
+  this.imgSrc = '';
+}
+
+onAddItem() {
+  console.log("hejka2222");
+  var newRecipe = new Recipe(this.name, this.prepare, '');
+  this.recipes.push(newRecipe);
+  this.updateNameNew(this.name, this.imgSrc)
+  this.name = '';
+  this.prepare = '';
+  this.imgSrc = '';
+}
+  updateNameNew(name, src) {
+    for(let r of this.recipes) {
+      if(r.name == name) {
+        r.imgPath = src;
+      }
+    }
   }
 
 }

@@ -1,7 +1,37 @@
 <div class="row">
   <div class="col-xs-12">
     <button class="btn btn-success" (click)="toggleChild()">New Recipe</button>
-    <app-recipe-creator *ngIf="showMePartially"></app-recipe-creator>
+  </div>
+</div>
+
+<div class="row" *ngIf="showMePartially">
+  <div class="col-xs-10">
+      <div class="row">
+        <div class="col-sm-5 form-group">
+          <label for="Name">Name</label>
+          <input type="text" [(ngModel)]="name" class="form-control" #inputName> 
+        </div>
+      </div>
+
+      <div class="row">
+          <div class="col-sm-5 form-group">
+            <label for="Name">Prepare</label>
+            <input type="text" [(ngModel)]="prepare" class="form-control" #inputPrepare>
+          </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-5 form-group">
+          <label for="Name">ImageSrc</label>
+          <input type="text" [(ngModel)]="imgSrc" class="form-control" #inputPrepare>
+        </div>
+    </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <button class="btn btn-success" (click)="onAddItem()">Add</button>
+        </div>
+      </div>
   </div>
 </div>
 
